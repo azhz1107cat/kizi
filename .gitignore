@@ -1,4 +1,5 @@
 /build
-.gitignore
+.cache
 .xmake
+.vscode
 cmake-build-debug

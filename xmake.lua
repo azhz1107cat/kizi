@@ -2,10 +2,12 @@ set_project("kiz")
 set_version("0.7.23")
 set_languages("c++20")
 
-target("version")
-    on_build(function(target)
+rule("version")
+    set_extensions(".in")
+    on_build_file(function (target, source_file, opt)
+        print("compiling")
         -- 读取文件内容
-        local content = io.readfile("src/version.hpp.in")
+        local content = io.readfile(source_file)
         if content then
             -- 进行文本替换，例如替换版本号
             content = content:gsub("@KIZ_VERSION_MAJOR@", "0")
@@ -13,12 +15,16 @@ target("version")
             content = content:gsub("@KIZ_VERSION_PATCH@", "11")
             content = content:gsub("@KIZ_VERSION@", "0.7.11")
             -- 将新内容写回文件（或写入新位置）
-            io.writefile("cmake-build-debug/include/version.hpp", content)
+            local target_file = path.join("cmake-build-debug/include", string.sub(path.filename(source_file), 1, #path.filename(source_file) - 3)) -- 去掉 .in 后缀
+            io.writefile(target_file, content)
         end
     end)
 
+
 target("kiz")
     set_kind("binary")
+
+    add_files("src/version.hpp.in", {rule = "version"}) -- 添加版本文件，并应用版本规则
 
     -- 入口文件
     add_files("src/main.cpp")
@@ -49,7 +55,7 @@ target("kiz")
 
     -- 工具模块
     add_files("src/error/error_reporter.cpp")
-    add_files("src/util/src_manager.cpp")
+    add_files("src/error/src_manager.cpp")
     add_files("src/repl/repl.cpp")
     add_files("src/repl/repl_readline.cpp")
 
@@ -75,5 +81,6 @@ target("kiz")
 
     -- 设置编译选项
     set_optimize("fastest")
-    add_cflags("-static")
-    add_cflags("-lm")
+    if is_os("windows") then
+        add_syslinks("user32")
+    end
