@@ -1,3 +1,12 @@
+/**
+ * @file gen_stmt.cpp
+ * @brief 中间代码生成器（IR Generator）生成语句部分核心实现
+ * 从AST生成IR
+ * @author azhz1107cat
+ * @date 2026-4-30
+ */
+
+
 #include <format>
 
 #include "../kiz.hpp"
