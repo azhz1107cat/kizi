@@ -34,6 +34,13 @@ model中功能拆解
 
 
 ## 使用kiz为kiz开发库
+1. 创建库文件夹 `modules/YourLibName`
+2. 主逻辑放在 `modules/YourLibName/__main__.kiz`中
+3. 在其他kiz文件中使用:
+```
+import YourLibName
+YourLibName.foo()
+```
 
 ---
 author : *azhz1107cat*
