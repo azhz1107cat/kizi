@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <cstdint>
+#include <filesystem>
 #include <thread>
 
 #include "../../src/models/models.hpp"
@@ -34,7 +35,7 @@ model::Object* ischild(model::Object* self, const model::List* args) {
     const auto a = args->val[0];
     const auto b = args->val[1];
     return check_based_object(a, b);
-    
+
 }
 
 model::Object* help(model::Object* self, const model::List* args) {
@@ -96,7 +97,7 @@ model::Object* breakpoint(model::Object* self, const model::List* args) {
             if (j<frame->code_object->var_names.size()) std::cout << ", ";
             ++j;
         }
-        
+
         std::cout << "\n";
         std::cout << "VarNames: ";
         j = 1;
@@ -377,7 +378,7 @@ model::Object* open(model::Object* self, const model::List* args) {
     auto path = cast_to_str(args->val[0])->val;
     auto mode = cast_to_str(args->val[1])->val;
 
-    auto real_path = kiz::Vm::get_exe_abs_dir() / kiz::Vm::get_current_file_path().parent_path() / path;
+    auto real_path = std::filesystem::absolute(path);
 
     std::ios_base::openmode open_mode = std::ios_base::in | std::ios_base::out; // 默认不设置 binary
     // 根据 mode 设置具体标志（此处 mode 不包含 'b'，即默认文本模式）
