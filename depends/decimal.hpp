@@ -478,8 +478,7 @@ public:
 
     Decimal operator*(const Decimal& other) const {
         BigInt mul_mant = mantissa_ * other.mantissa_;
-        Decimal res(mul_mant);
-        res.exponent_ = exponent_ + other.exponent_;
+        Decimal res(mul_mant, exponent_ + other.exponent_);
         res.normalize();
         return res;
     }
