@@ -1,3 +1,10 @@
+/**
+ * @file parse_stmt.cpp
+ * @brief 语法分析器解析语句部分核心实现
+ * @author azhz1107cat
+ * @date 2025-11-14
+ */
+
 #include "parser.hpp"
 
 #include <algorithm>
