@@ -1,3 +1,10 @@
+/**
+ * @file color.cpp
+ * @brief 提供控制台颜色控制码
+ * @author azhz1107cat
+ * @date 2026-1-23
+ */
+
 #pragma once
 #include <string>
 
