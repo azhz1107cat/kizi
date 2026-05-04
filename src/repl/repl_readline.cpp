@@ -1,3 +1,10 @@
+/**
+ * @file repl_readline.cpp
+ * @brief 读取用户输入, 支持换行
+ * @author CGrakeski, azhz1107cat, at2er
+ * @date 2026-1-30
+ */
+
 #include <iosfwd>
 #include <string>
 #include <chrono>
