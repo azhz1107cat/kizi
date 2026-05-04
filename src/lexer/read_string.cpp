@@ -1,3 +1,10 @@
+/**
+ * @file read_string.cpp
+ * @brief 词法分析器读取字符串部分
+ * @author azhz1107cat
+ * @date 2026-2-8
+ */
+
 #include "lexer.hpp"
 
 namespace kiz {
